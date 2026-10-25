@@ -22,4 +22,4 @@ sequelize
     console.error('Connect error: ', error);
   });
 
-  export default sequelize;
+export default sequelize;
