@@ -54,7 +54,7 @@ const Tour = sequelize.define("Tour", {
   }
 }, {
   tableName: "tours",
-  timestamps: true, // Tữ động quản lý phần createdAt, updateAt
+  timestamps: true, // Tự động quản lý phần createdAt, updateAt
 });
 
 export default Tour;
