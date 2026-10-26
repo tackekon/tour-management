@@ -17,7 +17,8 @@
     "moment": "^2.31.0",
     "mysql2": "^3.24.6",
     "pug": "^3.0.4",
-    "sequelize": "^6.37.8"
+    "sequelize": "^6.37.8",
+    "slugify": "^1.6.9"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
