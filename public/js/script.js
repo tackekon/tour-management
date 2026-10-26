@@ -54,6 +54,71 @@ const showMiniCart  = () => {
 }
 showMiniCart();
 
+// Hiển thị sản phẩm vào trang giỏ hàng
+const drawCart = () => {
+  const tableCart = document.querySelector("[table-cart]");
+  if (tableCart) {
+    fetch("/cart/list", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: localStorage.getItem("cart")
+    })
+      .then(res => res.json())
+      .then(data => {
+        // tours và total là data từ cart.controller trả về
+        const total = data.total;
+        const tours = data.tours;
+        
+        // Tạo html String
+        const htmlsTr = tours.map((item, index) => `
+          <tr>
+            <td>${index + 1}</td>
+            <td>
+              <img 
+                src="${item.image}" 
+                alt="${item.title}" 
+                width="80px"
+              >
+            </td>
+            <td>
+              <a href="/tours/detail/${item.slug}">
+                ${item.title}
+              </a>
+            </td>
+            <td>
+              ${item.price_special.toLocaleString()}đ
+            </td>
+            <td>
+              <input type="number" name="quantity" value="${item.quantity}" min="1" item-id="${item.tourId}" style="width: 60px">
+            </td>
+            <td>
+              ${item.total.toLocaleString()}đ
+            </td>
+            <td>
+              <button class="btn btn-sm btn-danger" btn-delete="${item.tourId}">Xóa</button>
+            </td>
+          </tr>
+        `);
+
+        // Truyền vào thẻ tbody
+        const tbody = tableCart.querySelector("tbody");
+        tbody.innerHTML = htmlsTr.join("");
+
+        // Tính tổng giỏ hàng
+        const totalPrice = document.querySelector("[total-price]");
+        if(totalPrice) {
+          totalPrice.innerHTML = total.toLocaleString();
+        }
+      });
+
+  }
+}
+
+drawCart();
+
+// End Hiển thị sản phẩm vào trang giỏ hàng
 
 // Thêm tour vào cart
 const formAddToCart = document.querySelector("[form-add-to-cart]");

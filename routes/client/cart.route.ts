@@ -5,5 +5,6 @@ const router: Router = Router();
 
 router.get("/", controller.index );
 
+router.post("/list", controller.list);
 
 export const cartRoutes: Router = router;
