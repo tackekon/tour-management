@@ -5,6 +5,7 @@ import moment from "moment";
 import clientRoutes from "./routes/client/index.route";
 import adminRoutes from "./routes/admin/index.route";
 import { systemConfig } from "./config/system";
+import path from "path";
 
 dotenv.config();
 
@@ -23,6 +24,9 @@ app.set("view engine", "pug");
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// TinyMCE
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
 // parse application/json
 app.use(bodyParser.json());
