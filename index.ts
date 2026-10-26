@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import moment from "moment";
 
 import clientRoutes from "./routes/client/index.route";
+import adminRoutes from "./routes/admin/index.route";
+import { systemConfig } from "./config/system";
 
 dotenv.config();
 
@@ -27,7 +29,10 @@ app.use(bodyParser.json());
 
 // App Local Variables
 app.locals.moment = moment;
+app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
+// Admin Routes
+adminRoutes(app);
 
 // Client Routes
 clientRoutes(app);
